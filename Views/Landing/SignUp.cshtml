@@ -1,0 +1,105 @@
+﻿@model SmartParking.Models.SignUpForm
+
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<main class="px-3">
+    <section class="mb-lg-5">
+        <!--Section heading-->
+        <h2 class="h1-responsive font-weight-bold text-center my-4 sign-up-text blue-text">Sign Up</h2>
+        <!--Section description-->
+        <p class="text-center w-responsive mx-auto mb-3">Please fill in this form to create an account!</p>
+        <hr>
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-12 mb-md-5 mb-xl-5">
+                @using (Html.BeginForm("SignUp", "Landing", FormMethod.Post, new { id = "sign-up-form" }))
+                {
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required", placeholder = "First name" })
+                                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.FirstName, "First name", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required", placeholder = "Last name" })
+                                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.LastName, "Last name", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @type = "number", required = "required", placeholder = "Phone number" })
+                                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.Phone, "Phone number", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", required = "required", placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.Email, "Email", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", required = "required", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.Password, "Password", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password", required = "required", placeholder = "Confirm password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.ConfirmPassword, "Confirm password", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+
+                    <div class="text-center text-md-left mt-3 mb-3">
+                        <input type="submit" class="btn btn-primary send-btn" value="Sign Up">
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+</main>

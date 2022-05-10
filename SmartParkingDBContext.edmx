@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SmartParkingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ContactUsEmail">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SenderEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParkingSlots">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SlotId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+          <Property Name="LicensePlate" Type="nchar" MaxLength="10" />
+          <Property Name="Person" Type="nchar" MaxLength="100" />
+          <Property Name="ContactInfo" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ParkInOuts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkIn" Type="int" Nullable="false" />
+          <Property Name="ParkOut" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBookings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SlotId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="LicensePlate" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" />
+          <Property Name="Phone" Type="varchar" MaxLength="30" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="UserType" Type="varchar" MaxLength="1" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SmartParkingDB.dbo.ActiveUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ActiveUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="UserType" Type="varchar" MaxLength="1" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SmartParkingDB.dbo.FreeSpots' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FreeSpots">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SlotId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SlotId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" />
+          <Property Name="Phone" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityContainer Name="SmartParkingDBModelStoreContainer">
+          <EntitySet Name="ContactUsEmail" EntityType="Self.ContactUsEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParkingSlots" EntityType="Self.ParkingSlots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParkInOuts" EntityType="Self.ParkInOuts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBookings" EntityType="Self.UserBookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveUser" EntityType="Self.ActiveUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ActiveUser].[UserId] AS [UserId], 
+    [ActiveUser].[Email] AS [Email], 
+    [ActiveUser].[Password] AS [Password], 
+    [ActiveUser].[UserType] AS [UserType], 
+    [ActiveUser].[Status] AS [Status]
+    FROM [dbo].[ActiveUser] AS [ActiveUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FreeSpots" EntityType="Self.FreeSpots" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FreeSpots].[Id] AS [Id], 
+    [FreeSpots].[SlotId] AS [SlotId]
+    FROM [dbo].[FreeSpots] AS [FreeSpots]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserInformation" EntityType="Self.UserInformation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserInformation].[UserId] AS [UserId], 
+    [UserInformation].[FirstName] AS [FirstName], 
+    [UserInformation].[LastName] AS [LastName], 
+    [UserInformation].[Phone] AS [Phone]
+    FROM [dbo].[UserInformation] AS [UserInformation]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmartParkingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ContactUsEmail">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SenderEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParkingSlot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SlotId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LicensePlate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Person" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="ContactInfo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ParkInOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkIn" Type="Int32" Nullable="false" />
+          <Property Name="ParkOut" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBooking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SlotId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LicensePlate" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ActiveUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FreeSpot">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SlotId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SlotId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="SmartParkingDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ContactUsEmails" EntityType="Self.ContactUsEmail" />
+          <EntitySet Name="ParkingSlots" EntityType="Self.ParkingSlot" />
+          <EntitySet Name="ParkInOuts" EntityType="Self.ParkInOut" />
+          <EntitySet Name="UserBookings" EntityType="Self.UserBooking" />
+          <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
+          <EntitySet Name="ActiveUsers" EntityType="Self.ActiveUser" />
+          <EntitySet Name="FreeSpots" EntityType="Self.FreeSpot" />
+          <EntitySet Name="UserInformations" EntityType="Self.UserInformation" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmartParkingDBModelStoreContainer" CdmEntityContainer="SmartParkingDBEntities">
+          <EntitySetMapping Name="ContactUsEmails">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.ContactUsEmail">
+              <MappingFragment StoreEntitySet="ContactUsEmail">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="SenderName" ColumnName="SenderName" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkingSlots">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.ParkingSlot">
+              <MappingFragment StoreEntitySet="ParkingSlots">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SlotId" ColumnName="SlotId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+                <ScalarProperty Name="Person" ColumnName="Person" />
+                <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkInOuts">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.ParkInOut">
+              <MappingFragment StoreEntitySet="ParkInOuts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParkIn" ColumnName="ParkIn" />
+                <ScalarProperty Name="ParkOut" ColumnName="ParkOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBookings">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.UserBooking">
+              <MappingFragment StoreEntitySet="UserBookings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SlotId" ColumnName="SlotId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegistrations">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.UserRegistration">
+              <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveUsers">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.ActiveUser">
+              <MappingFragment StoreEntitySet="ActiveUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreeSpots">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.FreeSpot">
+              <MappingFragment StoreEntitySet="FreeSpots">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SlotId" ColumnName="SlotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInformations">
+            <EntityTypeMapping TypeName="SmartParkingDBModel.UserInformation">
+              <MappingFragment StoreEntitySet="UserInformation">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

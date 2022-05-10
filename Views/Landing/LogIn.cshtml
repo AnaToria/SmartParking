@@ -1,0 +1,57 @@
+﻿@model SmartParking.Models.LogInForm
+
+@{
+    ViewData["Title"] = "Log In";
+}
+
+<main class="px-3">
+    <div class="sign-in-form">
+        @using (Html.BeginForm("LogIn", "Landing", FormMethod.Post, new { id = "sign-in-form" }))
+        {
+            <h1 class="h1-responsive font-weight-bold text-center my-4 sign-in-text blue-text">Log In</h1>
+            <p class="text-center w-responsive mx-auto mb-3">Please sign in with your existing credentials</p>
+            <hr>
+            <!--Grid row-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="md-form mb-0 form-floating">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", required = "required", placeholder = "Email" })
+                        @Html.LabelFor(m => m.Email, "Email", new { @class = "label-text" })
+                    </div>
+                </div>
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <div class="md-form mb-0 form-floating">
+                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", required = "required", placeholder = "Password" })
+                        @Html.LabelFor(m => m.Password, "Password", new { @class = "label-text" })
+                    </div>
+                </div>
+            </div>
+            <!--Grid row-->
+
+            <div class="checkbox mb-3 mt-1">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+
+            <div class="text-center text-md-left mt-3 mb-3">
+                <input type="submit" class="btn btn-primary send-btn" value="Log In">
+            </div>
+        }
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+</main>

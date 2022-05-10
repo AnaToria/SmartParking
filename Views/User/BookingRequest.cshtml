@@ -1,0 +1,113 @@
+﻿@model SmartParking.Models.BookingRequest
+
+@{
+    ViewBag.Title = "Booking Request";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="https://smartparkingteam.github.io/" target="_blank" class="brand-link">
+        <img src="~/wwwroot/assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-square elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Smart Parking</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/wwwroot/dist/img/avatar.png" class="img-circle elevation-3" alt="User Image">
+            </div>
+            <div class="info">
+                <a class="d-block">@Session["userName"]</a>
+            </div>
+
+        </div>
+
+        @Html.Partial("UserSidebarMenu")
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Booking Request</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="modal-content"">
+                            @using (Html.BeginForm("BookingRequest", "User", FormMethod.Post, new { id = "booking-form"}))
+                            {
+                                <div class="card card-primary">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.Date, "Booking Date")
+                                                    @Html.TextBoxFor(m => m.Date, new { type = "datetime-local", @class = "form-control", required = "required" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.LicensePlate, "License Plate")
+                                                    @Html.TextBoxFor(m => m.LicensePlate, new { @class = "form-control", required = "required" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.SlotId, "Parking Slot")
+                                                    @Html.DropDownListFor(m => m.SlotId, Model.FreeSpotList, "-select-", new { @class = "form-control", required = "required" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center text-md-center mt-3 mb-3">
+                                    <input type="submit" class="btn btn-primary send-btn" value="Book">
+                                </div>
+                            }
+
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                        
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}

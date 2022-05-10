@@ -1,0 +1,113 @@
+﻿@model SmartParking.Models.ContactForm
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<main class="px-3">
+    <section class="mb-lg-5">
+
+        <!--Section heading-->
+        <h2 class="h1-responsive font-weight-bold text-center my-4 contact-text blue-text">Contact us</h2>
+        <!--Section description-->
+        <p class="text-center w-responsive mx-auto mb-3">
+            Do you have any questions? Please do not hesitate to
+            contact us directly. Our team will come back to you within
+            a matter of hours to help you.
+        </p>
+        <hr>
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-9 mb-md-5 mb-xl-5">
+                @using (Html.BeginForm("Contact", "Landing", FormMethod.Post, new { id = "contact-form" }))
+                {
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.SenderName, new { @class = "form-control", required = "required", placeholder = "Name" })
+                                @Html.ValidationMessageFor(m => m.SenderName, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.SenderName, "Name", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                        <!--Grid column-->
+                        <div class="col-md-6 mt-2">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.SenderMail, new { @class = "form-control", required = "required", placeholder = "Your email" })
+                                @Html.ValidationMessageFor(m => m.SenderMail, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.SenderMail, "Your email", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row mt-2">
+                        <!--Grid column-->
+                        <div class="col-md-12">
+                            <div class="md-form mb-0 form-floating">
+                                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", required = "required", placeholder = "Subject" })
+                                @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+                                @Html.LabelFor(m => m.Subject, "Subject", new { @class = "label-text" })
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row mt-2">
+                        <!--Grid column-->
+                        <div class="col-md-12">
+                            <div class="md-form ">
+                                @Html.TextAreaFor(m => m.Message, new { @class = "form-control", required = "required", placeholder = "Your message", rows = 3 })
+                                @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <div class="text-center text-md-left mt-3 mb-3">
+                        <input type="submit" class="btn btn-primary send-btn" value="Send Email">
+                    </div>
+                }
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-md-3 text-center">
+                <ul class="list-unstyled mb-0 contact-list">
+                    <li class="contact-info">
+                        <span class="material-icons contact-icon">
+                            place
+                        </span>
+                        <p>Tbilisi, Georgia</p>
+                    </li>
+
+                    <li class="contact-info">
+                        <span class="material-icons contact-icon">phone_in_talk</span>
+                        <p>+995 XXX XXX XXX</p>
+                    </li>
+
+                    <li class="contact-info">
+                        <span class="material-icons contact-icon">mail</span>
+                        <p>contact@smartparking.com</p>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+        </div>
+    </section>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+</main>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Parking</title>
+    <link rel="icon" href="~/wwwroot/assets/img/tab-icon.png">
+    <link href="~/wwwroot/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/wwwroot/assets/dist/css/landing.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="d-flex h-100 text-center text-white bg-dark banner">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div class="header">
+                <div>
+                    <a href="@Url.Action("Index", "Landing")">
+                        <img class="cover-logo" src="~/wwwroot/assets/img/logo.png">
+                    </a>
+                </div>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    @Html.ActionLink("Sign Up", "SignUp", "Landing", new { @class = "nav-link" })
+                    @Html.ActionLink("Log In", "LogIn", "Landing", new { @class = "nav-link" })
+                    @Html.ActionLink("Contact", "Contact", "Landing", new { @class = "nav-link" })
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3">
+            @RenderBody()
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p>
+                Website for <a href="https://sdsu.edu.ge/en/" target="_blank" class="text-white">SDSU Capstone Project</a>, by
+                <a href="https://smartparkingteam.github.io/" target="_blank" class="text-white">Smart Parking Team</a>.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
