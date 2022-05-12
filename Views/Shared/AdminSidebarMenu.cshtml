@@ -3,8 +3,8 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
         with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open">
-            <a href="dashboard.php" class="nav-link">
+        <li class="nav-item">
+            <a href="Dashboard" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard
@@ -12,61 +12,39 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="booking.php" class="nav-link">
+            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                    Booking
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-car"></i>
-                <p>
-                    Vehicle
+                    Booking Management
                     <i class="fas fa-angle-left right"></i>
                     <span class="badge badge-info right"></span>
                 </p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="owenermanagement.php" class="nav-link">
+                    <a href="ActiveBookings" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Owner Management Form</p>
+                        <p>Active Bookings</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="category.php" class="nav-link">
+                    <a href="BookingRequest" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Category</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="informationmanagement.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Information Management</p>
+                        <p>Request Booking</p>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="nav-item">
-            <a href="parkingslot.php" class="nav-link">
+            <a href="ParkingSlots" class="nav-link">
                 <i class="nav-icon fas fa-parking"></i>
                 <p>
-                    Parking Slot
+                    Parking Slots
                 </p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="payment.php" class="nav-link">
-                <i class="nav-icon fas fa-money-bill-alt"></i>
-                <p>
-                    Payment
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="usermanagement.php" class="nav-link">
+            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users-cog"></i>
                 <p>
                     User Management
@@ -74,15 +52,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="usergroup.php" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                    User Group
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="../index.php" class="nav-link">
+            <a href="@Url.Action("LogOut", "Landing")" class="nav-link">
                 <i class="nav-icon fas fa-power-off"></i>
                 <p>
                     Logout

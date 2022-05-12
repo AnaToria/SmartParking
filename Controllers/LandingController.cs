@@ -141,12 +141,10 @@ namespace SmartParking.Controllers
 
                     if (user.UserType == "A")
                     {
-                        ViewBag.Message = string.Format("User Type - Admin");
-                        return View();
+                        return RedirectToAction("Dashboard", "Admin");
                     }
                     else
                     {
-                        ViewBag.Message = string.Format("User Type - Common");
                         return RedirectToAction("Dashboard","User");
                     }
                 }

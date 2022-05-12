@@ -155,6 +155,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminBookingRequest.cs" />
     <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\LogInForm.cs" />
     <Compile Include="Models\SignUpForm.cs" />
@@ -436,6 +437,9 @@
     </Content>
     <Content Include="Views\Landing\LogOut.cshtml" />
     <Content Include="Views\Landing\Index.cshtml" />
+    <Content Include="Views\Admin\ParkingSlots.cshtml" />
+    <Content Include="Views\Admin\ActiveBookings.cshtml" />
+    <Content Include="Views\Admin\BookingRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

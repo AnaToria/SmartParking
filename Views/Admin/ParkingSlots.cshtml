@@ -1,8 +1,8 @@
-﻿@model SmartParking.UserBooking
+﻿@model SmartParking.ParkingSlot
 
 @{
-    ViewBag.Title = "Booking History";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = "Parking Slots";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <!-- Main Sidebar Container -->
@@ -23,13 +23,13 @@
             <div class="info">
                 <a class="d-block">@Session["userName"]</a>
             </div>
-
         </div>
 
-        @Html.Partial("UserSidebarMenu")
+        @Html.Partial("AdminSidebarMenu")
     </div>
     <!-- /.sidebar -->
 </aside>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Booking Request</h1>
+                    <h1>Parking Slots</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -53,7 +53,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Your booking request history</h3>                            
+                            <h3 class="card-title">Parking slots states</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -61,62 +61,68 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>Request Id</th>
                                             <th>Parking Slot No.</th>
-                                            <th>Booking Date</th>
-                                            <th>License Plate</th>
                                             <th>Status</th>
-                                            <th>Active</th>
-                                            <th width="7%"></th>
+                                            <th>License Plate</th>
+                                            <th>Person</th>
+                                            <th>Contact Info</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var form in ViewData["bookingHistory"] as List<UserBooking>)
+                                        @foreach (var slot in ViewData["parkingSlots"] as List<ParkingSlot>)
                                         {
                                             <tr>
-                                                <td><b style="color: maroon">@form.Id</b></td>
-                                                <td>@form.SlotId</td>
-                                                <td>@form.Date</td>
-                                                <td>@form.LicensePlate</td>
-                                                @if (form.Status == "B")
+                                                <td>@slot.SlotId</td>
+                                                @if (slot.Status == "B")
                                                 {
                                                     <td>Booked</td>
                                                 }
-                                                @if (form.Status == "P")
+                                                @if (slot.Status == "P")
                                                 {
                                                     <td>Parked</td>
                                                 }
-                                                @if (form.Status == "I")
+                                                @if (slot.Status == "I")
                                                 {
                                                     <td>In Progress</td>
                                                 }
-                                                @if (form.IsActive)
+                                                @if (slot.Status == "F")
                                                 {
-                                                    <td>Active</td>
+                                                    <td>Free</td>
                                                 }
-                                                @if (!form.IsActive)
+                                                @if (string.IsNullOrEmpty(slot.LicensePlate)) 
+                                                { 
+                                                    <td></td>
+                                                }
+                                                else 
                                                 {
-                                                    <td>Inactive</td>
+                                                    <td>@slot.LicensePlate</td>
                                                 }
-                                                <td>
-                                                    @if (form.Status == "B" && form.IsActive)
-                                                    {
-                                                        <button class="btn btn-primary btn-xs" onclick="updateRecord(@form.Id)"><i class="fa fa-check"></i> Here</button>
-                                                        <button class="btn btn-danger btn-xs" onclick="deleteRecord(@form.Id)"><i class="fa fa-trash"></i></button>
-                                                    }
-                                                </td>
+                                                @if (string.IsNullOrEmpty(slot.Person)) 
+                                                { 
+                                                    <td></td>
+                                                }
+                                                else 
+                                                {
+                                                    <td>@slot.Person</td>
+                                                }
+                                                @if (string.IsNullOrEmpty(slot.ContactInfo)) 
+                                                { 
+                                                    <td></td>
+                                                }
+                                                else 
+                                                {
+                                                    <td>@slot.ContactInfo</td>
+                                                }
                                             </tr>
                                         }
                                     </tbody>
                                     <tfoot class="thead-light">
                                         <tr>
-                                            <th>Request Id</th>
                                             <th>Parking Slot No.</th>
-                                            <th>Booking Date</th>
-                                            <th>License Plate</th>
                                             <th>Status</th>
-                                            <th>Active</th>
-                                            <th width="7%"></th>
+                                            <th>License Plate</th>
+                                            <th>Person</th>
+                                            <th>Contact Info</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -158,31 +164,6 @@
         bsCustomFileInput.init();
     });
 
-</script>
-<script>
-    function deleteRecord(id) {
-        $.ajax({
-            type: "POST",
-            contextType: 'application/json; charset=utf-8',
-            contentType: 'html',
-            url: "/User/DeleteRecord/" + id,
-            success: function () {
-                window.location.reload();
-            }
-        });
-    }
-
-    function updateRecord(id) {
-        $.ajax({
-            type: "POST",
-            contextType: 'application/json; charset=utf-8',
-            contentType: 'html',
-            url: "/User/UpdateRecord/" + id,
-            success: function () {
-                window.location.reload();
-            }
-        });
-    }
 </script>
 
 @if (ViewBag.Message != null)

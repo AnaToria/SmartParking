@@ -7,9 +7,10 @@ using System.Web.Mvc;
 
 namespace SmartParking.Models
 {
-    public class BookingRequest
+    public class AdminBookingRequest
     {
         public int Id { get; set; }
+        [Required]
         public int UserId { get; set; }
         [Required]
         public int SlotId { get; set; }
@@ -20,5 +21,6 @@ namespace SmartParking.Models
         public string Status { get; set; }
         public bool? IsActive { get; set; }
         public IEnumerable<SelectListItem> FreeSpotList { get; set; }
+        public IEnumerable<SelectListItem> ActiveUserList { get; set; }
     }
 }

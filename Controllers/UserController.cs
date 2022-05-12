@@ -105,6 +105,9 @@ namespace SmartParking.Controllers
             
             var spot = _entites.ParkingSlots.Where(s => s.SlotId == record.SlotId).FirstOrDefault();
             spot.Status="F";
+            spot.LicensePlate = string.Empty;
+            spot.Person = string.Empty;
+            spot.ContactInfo = string.Empty;
             
             _entites.SaveChanges();
 

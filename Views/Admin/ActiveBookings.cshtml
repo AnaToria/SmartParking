@@ -1,8 +1,8 @@
 ﻿@model SmartParking.UserBooking
 
 @{
-    ViewBag.Title = "Booking History";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = "Active Bookings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <!-- Main Sidebar Container -->
@@ -23,13 +23,13 @@
             <div class="info">
                 <a class="d-block">@Session["userName"]</a>
             </div>
-
         </div>
 
-        @Html.Partial("UserSidebarMenu")
+        @Html.Partial("AdminSidebarMenu")
     </div>
     <!-- /.sidebar -->
 </aside>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Booking Request</h1>
+                    <h1>Booking History</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -53,7 +53,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Your booking request history</h3>                            
+                            <h3 class="card-title">User bookings</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -62,6 +62,7 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Request Id</th>
+                                            <th>User Id</th>
                                             <th>Parking Slot No.</th>
                                             <th>Booking Date</th>
                                             <th>License Plate</th>
@@ -75,6 +76,7 @@
                                         {
                                             <tr>
                                                 <td><b style="color: maroon">@form.Id</b></td>
+                                                <td>@form.UserId</td>
                                                 <td>@form.SlotId</td>
                                                 <td>@form.Date</td>
                                                 <td>@form.LicensePlate</td>
@@ -101,7 +103,6 @@
                                                 <td>
                                                     @if (form.Status == "B" && form.IsActive)
                                                     {
-                                                        <button class="btn btn-primary btn-xs" onclick="updateRecord(@form.Id)"><i class="fa fa-check"></i> Here</button>
                                                         <button class="btn btn-danger btn-xs" onclick="deleteRecord(@form.Id)"><i class="fa fa-trash"></i></button>
                                                     }
                                                 </td>
@@ -111,6 +112,7 @@
                                     <tfoot class="thead-light">
                                         <tr>
                                             <th>Request Id</th>
+                                            <th>User Id</th>
                                             <th>Parking Slot No.</th>
                                             <th>Booking Date</th>
                                             <th>License Plate</th>
@@ -154,30 +156,12 @@
     });
 </script>
 <script>
-    $(function () {
-        bsCustomFileInput.init();
-    });
-
-</script>
-<script>
     function deleteRecord(id) {
         $.ajax({
             type: "POST",
             contextType: 'application/json; charset=utf-8',
             contentType: 'html',
-            url: "/User/DeleteRecord/" + id,
-            success: function () {
-                window.location.reload();
-            }
-        });
-    }
-
-    function updateRecord(id) {
-        $.ajax({
-            type: "POST",
-            contextType: 'application/json; charset=utf-8',
-            contentType: 'html',
-            url: "/User/UpdateRecord/" + id,
+            url: "/Admin/DeleteRecord/" + id,
             success: function () {
                 window.location.reload();
             }
@@ -193,3 +177,4 @@
             };
     </script>
 }
+
