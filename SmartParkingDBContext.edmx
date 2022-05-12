@@ -4,15 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SmartParkingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SmartParkingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ContactUsEmail">
           <Key>
             <PropertyRef Name="EmailId" />
           </Key>
           <Property Name="EmailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SenderName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SenderEmail" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SenderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SenderEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Message" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="ParkingSlots">
@@ -21,10 +21,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SlotId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="nchar" MaxLength="10" />
-          <Property Name="LicensePlate" Type="nchar" MaxLength="10" />
-          <Property Name="Person" Type="nchar" MaxLength="100" />
-          <Property Name="ContactInfo" Type="nchar" MaxLength="30" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Person" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactInfo" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="ParkInOuts">
           <Key>
@@ -42,8 +42,8 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="SlotId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="LicensePlate" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="Status" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRegistration">
@@ -51,13 +51,13 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="30" />
-          <Property Name="LastName" Type="varchar" MaxLength="30" />
-          <Property Name="Phone" Type="varchar" MaxLength="30" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="30" />
-          <Property Name="UserType" Type="varchar" MaxLength="1" />
-          <Property Name="Status" Type="varchar" MaxLength="1" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -89,9 +89,11 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="30" />
-          <Property Name="LastName" Type="varchar" MaxLength="30" />
-          <Property Name="Phone" Type="varchar" MaxLength="30" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="SmartParkingDBModelStoreContainer">
           <EntitySet Name="ContactUsEmail" EntityType="Self.ContactUsEmail" Schema="dbo" store:Type="Tables" />
@@ -119,12 +121,13 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
     [UserInformation].[UserId] AS [UserId], 
     [UserInformation].[FirstName] AS [FirstName], 
     [UserInformation].[LastName] AS [LastName], 
-    [UserInformation].[Phone] AS [Phone]
+    [UserInformation].[Email] AS [Email], 
+    [UserInformation].[Phone] AS [Phone], 
+    [UserInformation].[UserType] AS [UserType]
     FROM [dbo].[UserInformation] AS [UserInformation]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SmartParkingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -133,9 +136,9 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
             <PropertyRef Name="EmailId" />
           </Key>
           <Property Name="EmailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SenderEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SenderEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="ParkingSlot">
@@ -144,10 +147,10 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SlotId" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="LicensePlate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Person" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="ContactInfo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LicensePlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Person" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactInfo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ParkInOut">
           <Key>
@@ -165,8 +168,8 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="SlotId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LicensePlate" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LicensePlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRegistration">
@@ -174,13 +177,13 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ActiveUser">
@@ -206,9 +209,11 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="SmartParkingDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ContactUsEmails" EntityType="Self.ContactUsEmail" />
@@ -308,6 +313,8 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
           <EntitySetMapping Name="UserInformations">
             <EntityTypeMapping TypeName="SmartParkingDBModel.UserInformation">
               <MappingFragment StoreEntitySet="UserInformation">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

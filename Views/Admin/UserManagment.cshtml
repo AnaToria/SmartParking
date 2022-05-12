@@ -1,0 +1,140 @@
+﻿@model SmartParking.UserInformation
+
+@{
+    ViewBag.Title = "User Managment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="https://smartparkingteam.github.io/" target="_blank" class="brand-link">
+        <img src="~/wwwroot/assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-square elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Smart Parking</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/wwwroot/dist/img/avatar.png" class="img-circle elevation-3" alt="User Image">
+            </div>
+            <div class="info">
+                <a class="d-block">@Session["userName"]</a>
+            </div>
+        </div>
+
+        @Html.Partial("AdminSidebarMenu")
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Managment</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Active users</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>User Id</th>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var slot in ViewData["activeUsers"] as List<UserInformation>)
+                                        {
+                                            <tr>
+                                                <td>@slot.UserId</td>
+                                                <td>@slot.FirstName</td>
+                                                <td>@slot.LastName</td>
+                                                <td>@slot.Phone</td>
+                                                <td>@slot.Email</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot class="thead-light">
+                                        <tr>
+                                            <th>User Id</th>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": [""]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script>
+    $(function () {
+        bsCustomFileInput.init();
+    });
+
+</script>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}

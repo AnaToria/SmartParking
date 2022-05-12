@@ -38,7 +38,7 @@ namespace SmartParking.Controllers
             var freeSpots = new List<int>();
             var activeUsers = new List<int>();
             freeSpots= FetchFreeSpots();
-            activeUsers = FetchActiveUsers();
+            activeUsers = FetchActiveUserIds();
 
             var viewModel = new AdminBookingRequest
             {
@@ -52,6 +52,14 @@ namespace SmartParking.Controllers
             }
 
             return View(viewModel);
+        }
+        
+        public ActionResult UserManagment()
+        {
+            var model = new List<UserInformation>();
+            model= FetchActiveUsers();
+            ViewData["activeUsers"] = model;
+            return View();
         }
         #endregion
 
@@ -139,9 +147,14 @@ namespace SmartParking.Controllers
             return _entites.FreeSpots.AsNoTracking().Select(a => a.SlotId).ToList();
         }
 
-        private List<int> FetchActiveUsers()
+        private List<int> FetchActiveUserIds()
         {
-            return _entites.ActiveUsers.AsNoTracking().Where(a => a.UserType != "A").Select(a => a.UserId).ToList();
+            return _entites.UserInformations.AsNoTracking().Where(a => a.UserType != "A").Select(a => a.UserId).ToList();
+        }
+
+        private List<UserInformation> FetchActiveUsers()
+        {
+            return _entites.UserInformations.AsNoTracking().Where(a => a.UserType != "A").ToList();
         }
 
         private int SpotIsFree(int spotId)

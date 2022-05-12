@@ -440,6 +440,7 @@
     <Content Include="Views\Admin\ParkingSlots.cshtml" />
     <Content Include="Views\Admin\ActiveBookings.cshtml" />
     <Content Include="Views\Admin\BookingRequest.cshtml" />
+    <Content Include="Views\Admin\UserManagment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
