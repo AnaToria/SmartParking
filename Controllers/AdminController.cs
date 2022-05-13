@@ -69,6 +69,12 @@ namespace SmartParking.Controllers
             ViewData["emails"] = model;
             return View();
         }
+
+        public ActionResult Email(int id)
+        {
+            var model = FetchEmail(id);
+            return View(model);
+        }
         #endregion
 
 
@@ -178,6 +184,11 @@ namespace SmartParking.Controllers
         private List<ContactUsEmail> FetchEmails()
         {
             return _entites.ContactUsEmails.ToList();
+        }
+
+        private ContactUsEmail FetchEmail(int id)
+        {
+            return _entites.ContactUsEmails.FirstOrDefault(e => e.EmailId == id);
         }
         #endregion
     }

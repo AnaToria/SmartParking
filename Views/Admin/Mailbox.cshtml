@@ -59,19 +59,34 @@
                                                 <div class="panel-body">
                                                     <table class="table table-hover mails">
                                                         <tbody>
-                                                            @foreach (var email in ViewData["emails"] as List<ContactUsEmail>) 
+                                                            @foreach (var email in ViewData["emails"] as List<ContactUsEmail>)
                                                             {
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="##email-read.html">@email.SenderName</a>
+                                                                <tr onclick="location.href='@Url.Action("Email", "Admin", new { id = email.EmailId })'" style="cursor:pointer;">
+
+                                                                    <td class="mail-select">
+                                                                        <label class="cr-styled">
+                                                                            <i class="fa fa-circle text-info m-r-15"></i>
+                                                                        </label>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="##email-read.html"><i class="fa fa-circle text-info m-r-15"></i>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a>
+                                                                        @email.SenderName
+                                                                    </td>
+                                                                    <td>
+                                                                        
+                                                                            @if (email.Message.Length <= 50)
+                                                                            {
+                                                                                @email.Message
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @email.Message.Substring(0, 49).Insert(49, "...")
+                                                                            }
                                                                     </td>
                                                                     <td class="text-right">
+                                                                        @email.Date.ToString("G")
                                                                     </td>
                                                                 </tr>
-                                                            }                                                              
+                                                            }
                                                         </tbody>
                                                     </table>
                                                 </div> 
@@ -87,7 +102,6 @@
         </div>
     </section>
 </div>
-
 
 @if (ViewBag.Message != null)
 {
