@@ -1,0 +1,99 @@
+﻿@model SmartParking.ContactUsEmail
+
+@{
+    ViewBag.Title = "Mail box";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="https://smartparkingteam.github.io/" target="_blank" class="brand-link">
+        <img src="~/wwwroot/assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-square elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Smart Parking</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/wwwroot/dist/img/avatar.png" class="img-circle elevation-3" alt="User Image">
+            </div>
+            <div class="info">
+                <a class="d-block">@Session["userName"]</a>
+            </div>
+        </div>
+
+        @Html.Partial("AdminSidebarMenu")
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Mailbox</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="wraper bootstrap snippets bootdeys bootdey">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default m-t-20">
+                                                <div class="panel-body">
+                                                    <table class="table table-hover mails">
+                                                        <tbody>
+                                                            @foreach (var email in ViewData["emails"] as List<ContactUsEmail>) 
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="##email-read.html">@email.SenderName</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="##email-read.html"><i class="fa fa-circle text-info m-r-15"></i>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a>
+                                                                    </td>
+                                                                    <td class="text-right">
+                                                                    </td>
+                                                                </tr>
+                                                            }                                                              
+                                                        </tbody>
+                                                    </table>
+                                                </div> 
+                                            </div> 
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}

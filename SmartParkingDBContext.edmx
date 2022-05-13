@@ -14,6 +14,7 @@
           <Property Name="SenderEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Message" Type="text" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ParkingSlots">
           <Key>
@@ -140,6 +141,7 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
           <Property Name="SenderEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="ParkingSlot">
           <Key>
@@ -234,6 +236,7 @@ warning 6002: The table/view 'SmartParkingDB.dbo.UserInformation' does not have 
           <EntitySetMapping Name="ContactUsEmails">
             <EntityTypeMapping TypeName="SmartParkingDBModel.ContactUsEmail">
               <MappingFragment StoreEntitySet="ContactUsEmail">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="SenderName" ColumnName="SenderName" />
                 <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />

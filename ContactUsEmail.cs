@@ -19,5 +19,6 @@ namespace SmartParking
         public string SenderEmail { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
+        public System.DateTime Date { get; set; }
     }
 }

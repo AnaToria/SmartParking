@@ -105,7 +105,8 @@ namespace SmartParking.Controllers
                         SenderName = form.SenderName,
                         SenderEmail = form.SenderMail,
                         Subject = form.Subject,
-                        Message = form.Message
+                        Message = form.Message,
+                        Date = DateTime.Now
                     };
 
                     _entites.ContactUsEmails.Add(email);

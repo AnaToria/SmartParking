@@ -57,8 +57,16 @@ namespace SmartParking.Controllers
         public ActionResult UserManagment()
         {
             var model = new List<UserInformation>();
-            model= FetchActiveUsers();
+            model = FetchActiveUsers();
             ViewData["activeUsers"] = model;
+            return View();
+        }
+
+        public ActionResult Mailbox()
+        {
+            var model = new List<ContactUsEmail>();
+            model = FetchEmails();
+            ViewData["emails"] = model;
             return View();
         }
         #endregion
@@ -165,6 +173,11 @@ namespace SmartParking.Controllers
         private UserInformation GetUserInformation(int userId)
         {
             return _entites.UserInformations.Where(u => u.UserId == userId).FirstOrDefault();
+        }
+
+        private List<ContactUsEmail> FetchEmails()
+        {
+            return _entites.ContactUsEmails.ToList();
         }
         #endregion
     }
