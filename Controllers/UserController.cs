@@ -120,7 +120,7 @@ namespace SmartParking.Controllers
             var record = _entites.UserBookings.Where(b => b.Id == id).FirstOrDefault();
             record.Status = "I";
 
-            var spot = _entites.ParkingSlots.Where(s => s.Id == id).FirstOrDefault();
+            var spot = _entites.ParkingSlots.Where(s => s.Id == record.SlotId).FirstOrDefault();
             spot.Status = "I";
             _entites.SaveChanges();
 
